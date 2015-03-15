@@ -1,0 +1,28 @@
+{% load i18n %}
+{% load mptt_tags %}
+{#{% load menu_tags %}#}
+
+<div class="panel-group" id="accordion">
+    <div class="panel panel-default">
+
+        <div class="container">
+            <a class="accordion_button shake animated" data-toggle="collapse" data-parent="#accordion" href="#collapse"><i class="fa fa-bars"></i></a>
+        </div>
+        <div id="collapse" class="panel-collapse collapse">
+
+            <ul class="root">
+                {% recursetree menu_objects %}
+                    <li>
+                        <p>{{ node.name }}</p>
+                        {% if not node.is_leaf_node %}
+                            <ul class="children">
+                                {{ children }}
+                            </ul>
+                        {% endif %}
+                    </li>
+                {% endrecursetree %}
+            </ul>
+
+        </div>
+    </div>
+</div>

@@ -22,10 +22,6 @@ urlpatterns = patterns('project.accounts.views',
     url(r'^populate-profile/$', 'populateProfileView',
 		{'template_name':'accounts/populate_profile.html'},
 		name='populateProfileView'),
-
-
-    url(r'^organizer/', include('project.accounts.urls_organizer')),
-
     # Страницы сайта
     # url(r'^(?P<slug>[-\w]+)/$', 'page_view',
     #     {'template_name':'main/page.html'},

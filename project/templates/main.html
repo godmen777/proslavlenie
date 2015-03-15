@@ -1,4 +1,5 @@
 {% load staticfiles %}
+
 <!DOCTYPE html>
 <html lang="ru">
     <head>
@@ -10,6 +11,7 @@
         <link href="{{ STATIC_URL }}AdminLte/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
         <!-- FontAwesome 4.3.0 -->
         <link href="{{ STATIC_URL }}AdminLte/font/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+        <link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,300,700,100&subset=latin,cyrillic-ext' rel='stylesheet' type='text/css'>
         <!-- Ionicons 2.0.0 -->
 {#        <link href="http://code.ionicframework.com/ionicons/2.0.0/css/ionicons.min.css" rel="stylesheet" type="text/css" />#}
         <!-- Theme style -->
@@ -18,15 +20,6 @@
              folder instead of downloading all of them to reduce the load. -->
 {#        <link href="{{ STATIC_URL }}AdminLte/dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />#}
         <!-- iCheck -->
-        <link href="{{ STATIC_URL }}AdminLte/plugins/iCheck/flat/blue.css" rel="stylesheet" type="text/css" />
-        <!-- Date Picker -->
-        <link href="{{ STATIC_URL }}AdminLte/plugins/datepicker/datepicker3.css" rel="stylesheet" type="text/css" />
-        <!-- Daterange picker -->
-        <link href="{{ STATIC_URL }}AdminLte/plugins/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />
-        <!-- bootstrap wysihtml5 - text editor -->
-        <link href="{{ STATIC_URL }}AdminLte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" type="text/css" />
-
-        <link href="{{ STATIC_URL }}css/style.css" rel="stylesheet" type="text/css" />
 
         <!-- Bootstrap -->
 
@@ -35,6 +28,13 @@
         {% endblock %}
 
         {% block page_css %}
+            <link href="{{ STATIC_URL }}AdminLte/plugins/iCheck/flat/blue.css" rel="stylesheet" type="text/css" />
+            <!-- Date Picker -->
+            <link href="{{ STATIC_URL }}AdminLte/plugins/datepicker/datepicker3.css" rel="stylesheet" type="text/css" />
+            <!-- Daterange picker -->
+            <link href="{{ STATIC_URL }}AdminLte/plugins/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />
+            <!-- bootstrap wysihtml5 - text editor -->
+            <link href="{{ STATIC_URL }}AdminLte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" type="text/css" />
         {% endblock %}
 
     </head>
@@ -56,8 +56,13 @@
             {% block body_sidebar %}
             {% endblock %}
 
-            {% block content %}
-            {% endblock %}
+
+
+            {% autoescape off %}  {# экранирует html код #}
+                {% block content %}
+                {% endblock %}
+            {% endautoescape %}
+
 
             {% block footer %}
             {% endblock %}

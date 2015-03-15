@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 #!/usr/bin/env python
 import os
-# import djcelery
-
+from easy_thumbnails.conf import Settings as thumbnail_settings
 from django.utils.translation import ugettext_lazy as _
 from os.path import abspath, dirname, basename, join, split
 
@@ -23,6 +22,10 @@ ADMIN_EMAIL = 'greenteamer@bk.ru'
 ADMINS = (
 	# ('Your Name', 'your_email@example.com'),
 )
+
+THUMBNAIL_PROCESSORS = (
+    'image_cropping.thumbnail_processors.crop_corners',
+) + thumbnail_settings.THUMBNAIL_PROCESSORS
 
 """celery"""
 CELERYBEAT_SCHEDULER="djcelery.schedulers.DatabaseScheduler"
@@ -117,7 +120,6 @@ STATICFILES_DIRS = (
 STATICFILES_FINDERS = (
 	'django.contrib.staticfiles.finders.FileSystemFinder',
 	'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    # 'dajaxice.finders.DajaxiceFinder',
 )
 
 # Make this unique, and don't share it with anybody.
@@ -138,20 +140,12 @@ MIDDLEWARE_CLASSES = (
 	'django.contrib.auth.middleware.AuthenticationMiddleware',
 	'django.contrib.messages.middleware.MessageMiddleware',
 	'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
-    #'webshop.SSLMiddleware.SSLRedirect',
 )
 
 TEMPLATE_DIRS = (
-	# Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-	# Always use forward slashes, even on Windows.
-	# Don't forget to use absolute paths, not relative paths.
 	os.path.join(PROJECT_PATH, 'templates').replace('\\', '/'),
 )
 
-
-# List of processors used by RequestContext to populate the context.
-# Each one should be a callable that takes the request object as its
-# only parameter and returns a dictionary to add to the context.
 TEMPLATE_CONTEXT_PROCESSORS = (
 	'django.contrib.auth.context_processors.auth',
 	'django.core.context_processors.debug',
@@ -161,14 +155,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 	'django.core.context_processors.request',
 	'django.contrib.messages.context_processors.messages',
 )
-
-
-# DAJAXICE_MEDIA_PREFIX="dajaxice"
-
-# DAJAX_FUNCTIONS=(
-#     'webshop.ajaxapp.ajax.order_form',
-#     'webshop.ajaxapp.ajax.send_form',
-# )
 
 TINYMCE_JS_URL = os.path.join(CURRPATH, '/libraries/tinymce/tinymce.min.js')
 TINYMCE_DEFAULT_CONFIG = {
@@ -194,10 +180,6 @@ ADAPTOR_INPLACEEDIT = {'auto_fk': 'inplaceeditform_extra_fields.fields.AdaptorAu
                        'tiny': 'inplaceeditform_extra_fields.fields.AdaptorTinyMCEField',
                        'ckeditor': 'inplaceeditform_extra_fields.fields.AdaptorCKEDITORField',}
 INSTALLED_APPS = (
-    # 'admin_tools',
-    # 'admin_tools.theming',
-    # 'admin_tools.menu',
-    # 'admin_tools.dashboard',
 	'django.contrib.auth',
 	'django.contrib.contenttypes',
 	'django.contrib.sessions',
@@ -205,38 +187,18 @@ INSTALLED_APPS = (
 	'django.contrib.messages',
 	'django.contrib.staticfiles',
 	'django.contrib.flatpages',
-	# Uncomment the next line to enable the admin:
-    # 'grappelli',
     'filebrowser',
 	'django.contrib.admin',
-    # 'south',
-	# Uncomment the next line to enable admin documentation:
-	# 'django.contrib.admindocs',
-    # 'mptt',
-    'bootstrap3',
-    # 'sorl.thumbnail',
-    # 'dajaxice',
-    # 'dajax',
-    # 'captcha',
     'south',
-    'captcha',
-    # 'sitetree',
-    # 'flatblocks',
-    # 'robokassa',
-    # Custom modules
-    # 'main',
-    # 'slider',
-    # 'country',
-    # 'feedback',
-    # 'inplaceeditform',
-    # 'inplaceeditform_extra_fields',
     'ckeditor',
     'tinymce',
-    # 'djcelery',
-    'djkombu',
     'mptt',
+    'mptt_tree_editor',
     'project.core',
     'project.accounts',
+    'project.menu',
+    'image_cropping',
+    'easy_thumbnails',
 
 )
 
