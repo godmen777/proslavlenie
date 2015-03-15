@@ -1,29 +1,33 @@
 # -*- coding: utf-8 -*-
 #!/usr/bin/env python
 from django.contrib import admin
-from project.core.models import *
+from project.core.models import Article, Page, SliderItem, ArticleGalleryImage, PageGalleryImage
+from image_cropping import ImageCroppingMixin
+from cicu.widgets import CicuUploderInput
+from django import forms
 
-class PropertiesInline(admin.StackedInline):
-    model = Properties
-    extra = 1
 
-class ProductImagesInline(admin.StackedInline):
-    model = ProductImages
-    extra = 1
+class ArticleImagesInline(ImageCroppingMixin, admin.StackedInline):
+    """Вывод заказов списком"""
+    model = ArticleGalleryImage
+    extra = 0
 
-class ProductAdmin(admin.ModelAdmin):
-    model = Product
-    # fieldsets = [
-    #     (u'Основная информация', {'fields':['name','slug','body']}),
-    #     (u'Специальная информация', {'fields': ['special_image','special_body']}),
-    # ]
-    inlines = [PropertiesInline, ProductImagesInline]
-    # prepopulated_fields = {'slug':('name',)}
+class PageImagesInline(admin.StackedInline):
+    """Вывод заказов списком"""
+    model = PageGalleryImage
+    extra = 0
 
-admin.site.register(Product, ProductAdmin)
-admin.site.register(ProductImages)
-admin.site.register(Properties)
-admin.site.register(Catalog)
-admin.site.register(CatalogProductProperties)
-admin.site.register(Category)
-admin.site.register(Purchase)
+class ArticleAdmin(ImageCroppingMixin, admin.ModelAdmin):
+    model = Article
+    fields = (('name', 'slug'), 'sub_title','entry', 'description', 'image', 'cropping', 'slider')
+    inlines = [ArticleImagesInline]
+    prepopulated_fields = {'slug':('name',),}
+
+class PageAdmin(admin.ModelAdmin):
+    model = Page
+    inlines = [PageImagesInline]
+    prepopulated_fields = {'slug':('name',)}
+
+admin.site.register(Article, ArticleAdmin)
+admin.site.register(Page, PageAdmin)
+admin.site.register(SliderItem)

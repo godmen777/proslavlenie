@@ -5,7 +5,6 @@ import random
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 # from project.accounts.profiles import getOrganizerPurchases
-from project.core.models import Purchase
 
 
 
@@ -37,14 +36,14 @@ class OrganizerProfile(BaseUserInfo):
     class Meta:
         verbose_name_plural = _(u'Профили организаторов')
 
-    def getOrganizerPurchases(self):
-        try:
-            profiles = Purchase.objects.filter(organizerProfile=self)
-            for profile in profiles: #используется для вывода статуса закупки (демо режим)
-                profile.bar = random.randrange(20,90,1)
-            return profiles
-        except:
-            return None
+    # def getOrganizerPurchases(self):
+    #     try:
+    #         profiles = Purchase.objects.filter(organizerProfile=self)
+    #         for profile in profiles: #используется для вывода статуса закупки (демо режим)
+    #             profile.bar = random.randrange(20,90,1)
+    #         return profiles
+    #     except:
+    #         return None
 
 
 def getOrganizerProfile(user):

@@ -1,46 +1,382 @@
-{% extends "core_main.html" %}
+{% extends "front_main.html" %}
+{% load thumbnail %}
+{% load cropping %}
+{% load mptt_tags %}
 
-{% block content %}
-      <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <section class="content-header">
-            <h1>Мои закупки</h1>
-            <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Главная</a></li>
-                <li class="active">Мои закупки</li>
-            </ol>
-        </section>
-
-        {% if not profile %}
-            <div class="pad margin no-print">
-                <div class="callout callout-info" style="margin-bottom: 0!important;">
-                    <h4><i class="fa fa-info"></i> Записочка</h4>
-                    Для того что бы работать организатором в SP Mooscow, вам необходимо заполнить личные данные, после этого Ваша учетная запись будет рассмотренна админимтратором и ей будет присвоен соответствующий статус
-                </div>
-            </div>
-        {% endif %}
-
-
-        <!-- Main content -->
-        <section class="invoice">
-            <!-- Table row -->
-            <div class="row">
-
-                <div class="col-xs-6">
-
-                    <ul>
-                        {% for purchase in purchases%}
-                            <li><a href="/purchase-{{ purchase.id }}">{{ purchase.name }}</a></li>
-                        {% endfor %}
-                    </ul>
-
-                </div><!-- /.col -->
-            </div><!-- /.row -->
-
-        </section><!-- /.content -->
-        <div class="clearfix"></div>
-    </div><!-- /.content-wrapper -->
-
+{% block page_css %}
+    <link href="{{ STATIC_URL }}theme/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="{{ STATIC_URL }}theme/css/swiper.min.css" rel="stylesheet" type="text/css" />
+    <style>
+</style>
 {% endblock %}
 
+{% block content %}
+<div id="front" class="content-wrapper" style="margin-left:0"><!-- Content Wrapper. Contains page content -->
+
+    <section class="header">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-xs-12 col-md-12">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-3" style="float: right">
+                            <input id="header_search" class="search-form" type="text"/>
+                        </div>
+                        <div class="col-xs-12 col-md-1" style="float: right">
+                            <span id="lang">En</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-xs-5">
+                            <img src="{{ STATIC_URL }}theme/img/logo.png" width="230" alt=""/>
+                        </div>
+                        <div class="col-xs-7 sepa">
+                            <ul class="top_menu sepa">
+                                <li><a href="/"><i class=""></i>Главная</a></li>
+                                <li><a href="#"><i class=""></i>Я новичек</a></li>
+                                <li><a href="#"><i class=""></i>О церкви</a></li>
+                                <li><a href="#"><i class=""></i>Расписание служений</a></li>
+                                <li><a href="#"><i class=""></i>Служения</a></li>
+                                <li><a href="#"><i class=""></i>Епархия</a></li>
+                                <li><a href="#"><i class=""></i>Вопрос-ответ</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 sepa" style="height: 360px">
+{#                    <h1>Мои закупки</h1>#}
+{#                    <ol class="breadcrumb">#}
+{#                        <li><a href="#"><i class=""></i> Главная</a></li>#}
+{#                        <li class="active">Мои закупки</li>#}
+{#                    </ol>#}
+                    <!-- Swiper -->
+                    <div class="swiper-container">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide"><img src="{{ MEDIA_URL }}slider/slide1.jpg" alt=""/></div>
+                            <div class="swiper-slide"><img src="{{ MEDIA_URL }}slider/slide2.jpg" alt=""/></div>
+                            <div class="swiper-slide"><img src="{{ MEDIA_URL }}slider/slide3.jpg" alt=""/></div>
+                        </div>
+                        <!-- Add Pagination -->
+                        <div class="swiper-pagination">
+                            <span class="my-pager">
+                                <div class="slider_icon">27 <small>апреля</small></div>
+                                <div class="title">Библейские классы</div>
+                                <div class="description">Дополнительные шаблоны созданы на основе базового, </div>
+                            </span>
+                            <span class="my-pager">
+                                <div class="slider_icon">15 <small>марта</small></div>
+                                <div class="title">Сорокодневный пост</div>
+                                <div class="description">Дополнительные шаблоны созданы на основе базового </div>
+                            </span>
+                            <span class="my-pager">
+                                <div class="slider_icon">5 <small>августа</small></div>
+                                <div class="title">День рождения нашей церкви</div>
+                                <div class="description">Дополнительные шаблоны созданы на основе базового, представленного </div>
+                            </span>
+                        </div>
+{#                        <div class="swiper-pagination swiper-pagination-clickable">#}
+{#                            <span class="swiper-pagination-bullet">#}
+{#                                <div style="background: #333; height: 100px; width: 200px;"></div>#}
+{#                            </span>#}
+{#                            <span class="swiper-pagination-bullet"></span>#}
+{#                            <span class="swiper-pagination-bullet"></span>#}
+{#                            <span class="swiper-pagination-bullet"></span>#}
+{#                            <span class="swiper-pagination-bullet"></span>#}
+{#                            <span class="swiper-pagination-bullet"></span>#}
+{#                        </div>#}
+                    </div>
+
+                </div>
+
+                <div class="col-xs-12">
+                    <div class="row">
+                        <div class="col-xs-4 sepa">
+                            <div class="btn_front">
+                                <img src="{{ STATIC_URL }}theme/img/pray.png" height="42" alt=""/>
+                                <a href="">Молитвенная нужда</a>
+                            </div>
+                        </div>
+                        <div class="col-xs-4 sepa">
+                            <div class="btn_front orange">
+                                <img src="{{ STATIC_URL }}theme/img/online.png" height="42" alt=""/>
+                                <a href="">Онлайн трансляция</a>
+                            </div>
+                        </div>
+                        <div class="col-xs-4 sepa">
+                            <div class="btn_front">
+                                <img src="{{ STATIC_URL }}theme/img/gift.png" height="42" alt=""/>
+                                <a href="">Сделать пожертвование</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="social">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="social_container">
+                        <span class="vk ic"></span>
+                        <span class="od ic"></span>
+                        <span class="fb ic"></span>
+                        <span class="ig ic"></span>
+                        <span class="yt ic"></span>
+                        <span class="tw ic"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-xs-12 col-md-5">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-12 sepa">
+                            <a href=""><img src="{{ STATIC_URL }}theme/img/pastor.jpg" alt=""/></a>
+                        </div>
+                        <div class="col-xs-12 col-md-12 sepa">
+                            <div class="news">
+                                <h4><a href="">Новости</a></h4>
+                                {% for news_item in "abcdefr" %}
+                                    <div class="news_item">
+                                        <div class="date">8.09.2015</div>
+                                        <a href="">Встреча служения "Старшего поколения" - Бог источник силы и мудрости для любой ситуации</a>
+                                    </div>
+                                {% endfor %}
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-md-4">
+                    <div class="row">
+                        <div class="col-xs-6 col-md-6 sepa">
+                            <div class="small_block">
+                                <a href=""><img src="{{ STATIC_URL }}theme/img/temple.jpg" alt=""/></a>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-md-6 sepa">
+                            <div class="small_block">
+                                <a href=""><img src="{{ STATIC_URL }}theme/img/glory.jpg" alt=""/></a>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-md-6 sepa">
+                            <div class="small_block">
+                                <a href=""><img src="{{ STATIC_URL }}theme/img/pretch.jpg" alt=""/></a>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-md-6 sepa">
+                            <div class="small_block">
+                                <a href=""><img src="{{ STATIC_URL }}theme/img/help.jpg" alt=""/></a>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-12 sepa">
+                            <a href="">
+                                <img src="{{ STATIC_URL }}theme/img/israel.jpg" alt=""/>
+                            </a>
+                        </div>
+                        <div class="col-xs-12 col-md-12 sepa">
+                            <a href="">
+                                <img src="{{ STATIC_URL }}theme/img/question.jpg" alt=""/>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-md-3">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-12 sepa">
+                            <div class="reviews">
+                                <h4><a href="">О нас пишут</a></h4>
+                                {% for news_item in "abc" %}
+                                    <div class="reviews_item">
+                                        <img src="{{ STATIC_URL }}theme/img/quoters.png" alt=""/>
+                                        <a href="">Фонд  действительно протягивает руку помощи и поддержки всем обратившимся в него людям, попавшим в трудную жизненную ситуацию</a>
+                                        <div class="person">— Людмила Людвиговна Ганьжина /член Общественной палаты Томской области , Председатель Томского регионального отделения ООБФ "Российский детский фонд"/</div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-12 sepa">
+                            <a href="">
+                                <img src="{{ STATIC_URL }}theme/img/plan.jpg" alt=""/>
+                            </a>
+                        </div>
+                        <div class="col-xs-12 col-md-12 sepa">
+                            <a href="">
+                                <img src="{{ STATIC_URL }}theme/img/video_blog.jpg" alt=""/>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="ministry">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-xs-12 col-md-12">
+
+                    <ul class="root">
+                        {% recursetree menu_objects %}
+                            <li>
+                                {{ node.name }}
+                                {% if not node.is_leaf_node %}
+                                    <ul class="children">
+                                        {{ children }}
+                                    </ul>
+                                {% endif %}
+                            </li>
+                        {% endrecursetree %}
+                    </ul>
+
+                    <h2>Служения церкви</h2>
+                    <div class="ministry_block">
+                        <ul>
+                            <h4>Библейское обучение</h4>
+                            <li><a href="">Домашние группы</a></li>
+                            <li><a href="">Аудио и видео проповеди</a></li>
+                            <li><a href="">Социальная работа</a></li>
+                            <li><a href="">Проекты</a></li>
+                            <li><a href="">Домашние группы</a></li>
+                            <li><a href="">Аудио и видео проповеди</a></li>
+                            <li><a href="">Социальная работа</a></li>
+                            <li><a href="">Проекты</a></li>
+                        </ul>
+                    </div>
+                    <div class="ministry_block">
+                        <ul>
+                            <h4>Библейское обучение</h4>
+                            <li><a href="">Домашние группы</a></li>
+                            <li><a href="">Аудио и видео проповеди</a></li>
+                            <li><a href="">Социальная работа</a></li>
+                            <li><a href="">Проекты</a></li>
+                            <li><a href="">Домашние группы</a></li>
+                            <li><a href="">Аудио и видео проповеди</a></li>
+                            <li><a href="">Социальная работа</a></li>
+                            <li><a href="">Проекты</a></li>
+                        </ul>
+                    </div>
+                    <div class="ministry_block">
+                        <ul>
+                            <h4>Библейское обучение</h4>
+                            <li><a href="">Домашние группы</a></li>
+                            <li><a href="">Аудио и видео проповеди</a></li>
+                            <li><a href="">Социальная работа</a></li>
+                            <li><a href="">Проекты</a></li>
+                            <li><a href="">Домашние группы</a></li>
+                            <li><a href="">Аудио и видео проповеди</a></li>
+                            <li><a href="">Социальная работа</a></li>
+                            <li><a href="">Проекты</a></li>
+                        </ul>
+                    </div>
+                    <div class="ministry_block">
+                        <ul>
+                            <h4>Библейское обучение</h4>
+                            <li><a href="">Домашние группы</a></li>
+                            <li><a href="">Аудио и видео проповеди</a></li>
+                            <li><a href="">Социальная работа</a></li>
+                            <li><a href="">Проекты</a></li>
+                            <li><a href="">Домашние группы</a></li>
+                            <li><a href="">Аудио и видео проповеди</a></li>
+                            <li><a href="">Социальная работа</a></li>
+                            <li><a href="">Проекты</a></li>
+                        </ul>
+                    </div>
+                    <div class="ministry_block">
+                        <ul>
+                            <h4>Библейское обучение</h4>
+                            <li><a href="">Домашние группы</a></li>
+                            <li><a href="">Аудио и видео проповеди</a></li>
+                            <li><a href="">Социальная работа</a></li>
+                            <li><a href="">Проекты</a></li>
+                            <li><a href="">Домашние группы</a></li>
+                            <li><a href="">Аудио и видео проповеди</a></li>
+                            <li><a href="">Социальная работа</a></li>
+                            <li><a href="">Проекты</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="articles">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-xs-12 col-md-12 sepa">
+                    <h2>Статьи</h2>
+                </div>
+
+                {% for article in articles %}
+
+                    <div class="col-xs-12 col-md-3 articles_item sepa">
+                        <div class="row">
+
+                            <div class="col-xs-4 col-md-4">
+                                <img class="radius90" src="{% cropped_thumbnail article "cropping" scale=0.5 %}">
+                            </div>
+
+                            <div class="col-xs-8 col-md-8">
+                                <a href="{{ article.url }}">{{ article.name }}</a>
+                                <div class="text">{{ article.entry|truncatewords:25 }}</div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                {% endfor %}
+
+
+
+                <div class="col-xs-12 col-md-12 sepa bible">
+                    <h3 class="center"><span>Библия на кажный день</span> <span><img src="{{ STATIC_URL }}theme/img/bible.png" alt=""/></span> <span>Евангелие от Иоанна 3:3-6</span> </h3>
+                    <div class="col-xs-12 center text">
+                        Иисус сказал ему в ответ: истинно, истинно говорю тебе, если кто не родится свыше, не может увидеть Царствия Божия.
+Никодим говорит Ему: как может человек родиться, будучи стар? неужели может он в другой раз войти в утробу матери своей и родиться?
+Иисус отвечал: истинно, истинно говорю тебе, если кто не родится от воды и Духа, не может войти в Царствие Божие.
+Рожденное от плоти есть плоть, а рожденное от Духа есть дух.
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+{#        <div class="clearfix"></div>#}
+
+</div><!-- /.content-wrapper -->
+{% endblock %}
+
+{% block page_js %}
+    <script src='{{ STATIC_URL }}AdminLte/plugins/fastclick/fastclick.min.js'></script>
+    <script src="{{ STATIC_URL }}AdminLte/dist/js/app.min.js" type="text/javascript"></script>
+{#    <script src='{{ STATIC_URL }}theme/js/swiper.jquery.min.js'></script>#}
+    <script src="{{ STATIC_URL }}theme/js/swiper.min.js" type="text/javascript"></script>
+    <script>
+    var swiper = new Swiper('.swiper-container', {
+{#        pagination: '.swiper-pagination',#}
+{#        paginationClickable: true,#}
+        direction: 'vertical'
+    });
+    $('.my-pager').on('click', function(){
+       swiper.slideTo($(this).index());
+    });
+    </script>
+{% endblock %}
