@@ -19,6 +19,7 @@ settings_local.py
 logs/
 pids/
 media/
+media/gallery_news/*
 save_2gis_data.py
 get_2gis_data.py
 get_2gis_filials.py
