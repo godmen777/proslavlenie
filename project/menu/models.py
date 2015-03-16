@@ -17,9 +17,8 @@ class MenuCategory(MPTTModel):
     def __unicode__(self):
         # return self.name
         return '%s%s' % ('--' * self.level, self.name)
-    @permalink
     def url(self):
-        return ('menu_category', (), {'menu_slug': self.slug})
+        return '/ministry/%s' % self.slug
 
 
 # class MenuItem(models.Model):

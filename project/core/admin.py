@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #!/usr/bin/env python
 from django.contrib import admin
-from project.core.models import Article, Page, SliderItem, ArticleGalleryImage, PageGalleryImage
+from project.core.models import Article, Page, SliderItem, ArticleGalleryImage, NewsGalleryImage, PageGalleryImage, News, Review
 from image_cropping import ImageCroppingMixin
 from cicu.widgets import CicuUploderInput
 from django import forms
@@ -12,8 +12,10 @@ class ArticleImagesInline(ImageCroppingMixin, admin.StackedInline):
     model = ArticleGalleryImage
     extra = 0
 
+class NewsImagesInline(ArticleImagesInline):
+    model = NewsGalleryImage
+
 class PageImagesInline(admin.StackedInline):
-    """Вывод заказов списком"""
     model = PageGalleryImage
     extra = 0
 
@@ -23,11 +25,21 @@ class ArticleAdmin(ImageCroppingMixin, admin.ModelAdmin):
     inlines = [ArticleImagesInline]
     prepopulated_fields = {'slug':('name',),}
 
+class NewsAdmin(ImageCroppingMixin, admin.ModelAdmin):
+    model = News
+    inlines = [NewsImagesInline]
+    fields = ('name', 'date', 'description', 'image', 'cropping' )
+
 class PageAdmin(admin.ModelAdmin):
     model = Page
     inlines = [PageImagesInline]
-    prepopulated_fields = {'slug':('name',)}
+    # prepopulated_fields = {'slug':('id',)}
+
+class SliderItemAdmin(ImageCroppingMixin, admin.ModelAdmin):
+    model = SliderItem
 
 admin.site.register(Article, ArticleAdmin)
 admin.site.register(Page, PageAdmin)
-admin.site.register(SliderItem)
+admin.site.register(SliderItem, SliderItemAdmin)
+admin.site.register(News, NewsAdmin)
+admin.site.register(Review)

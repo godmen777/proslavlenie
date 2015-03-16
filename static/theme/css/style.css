@@ -9,6 +9,10 @@ h4 {
     font-family: "Roboto Slab";
     color: #0773bb;
 }
+#news h1 {
+    font-size: 32px;
+    text-transform:none ;
+}
 .bible h3 {
     color: #0773bb;
     font-family: "Roboto Slab";
@@ -233,6 +237,8 @@ small {
     -ms-flex-align: center;
     -webkit-align-items: center;
     align-items: center;
+    margin-right: 289px;
+    width: 881px!important;
 }
 .swiper-pagination {
     padding-top: 10px;
@@ -246,6 +252,7 @@ small {
     height: 31%;
     width: 100%;
     display: block;
+    cursor: pointer;
 }
 /*.swiper-pagination .my-pager .slider_icon {*/
     /*width: 54px;*/
@@ -300,6 +307,11 @@ small {
     position: absolute;
     top: 20px;
     left: 25px;
+}
+#news .gallery img {
+    margin-right: 25px;
+    margin-bottom: 25px;
+    margin-top: 25px;
 }
 .news {
     background: #97d5ff;
