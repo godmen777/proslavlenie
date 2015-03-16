@@ -22,11 +22,14 @@ class BaseArticle(models.Model):
 # единица слайдера , связи 1 к 1 со статьями и со страницами
 class SliderItem(models.Model):
     name = models.CharField(max_length=200, verbose_name=u'Название слайдера')
+    date = models.DateField(verbose_name=u'Дата', default=datetime.datetime.now, editable=True)
     description = models.TextField(verbose_name=u'Описание слайдера')
-    image = models.FileField(verbose_name=u'Изображение для слайдера', upload_to='slider', blank=True)
+    image = models.ImageField(verbose_name=u'Изображение для слайдера', upload_to='slider', blank=True)
+    cropping = ImageRatioField('image', '880x320', verbose_name=u'Обрезка фото')
     def __unicode__(self):
         return _(u'Слайдер: ') + self.name
-
+    def url(self):
+        return '/media/%s' % self.image
 
 
 class Article(BaseArticle):
@@ -49,7 +52,7 @@ class News(models.Model):
     name = models.CharField(max_length=200, verbose_name=u'Название новости')
     description = RichTextField()
     image = models.ImageField(verbose_name=u'Изображение', upload_to='news/images/', blank=True)
-    cropping = ImageRatioField('image', '340x340', verbose_name=u'Иконка')
+    cropping = ImageRatioField('image', '275x200', verbose_name=u'Иконка')
     date = models.DateField(verbose_name=u'Дата', default=datetime.datetime.now, editable=True)
     def __unicode__(self):
         return _(u'Новость: ') + self.name
@@ -60,6 +63,13 @@ class News(models.Model):
     def url(self):
         return '/news/%s' % self.id
 
+
+class Review(models.Model):
+    name = models.CharField(max_length=200, verbose_name=u'Имя')
+    description = models.TextField(verbose_name=u'Отзыв')
+    date = models.DateField(verbose_name=u'Дата', default=datetime.datetime.now, editable=True)
+    def __unicode__(self):
+        return _(u'Отзыв: ') + self.name
 
 
 class Page(BaseArticle):
@@ -80,7 +90,7 @@ class ArticleGalleryImage(models.Model):
 class NewsGalleryImage(models.Model):
     news = models.ForeignKey(News)
     image = models.ImageField(verbose_name=u'Изображение для галереи', upload_to='gallery_news', blank=True)
-    cropping = ImageRatioField('image', '340x340')
+    cropping = ImageRatioField('image', '175x120')
     def url(self):
         return "/media/%s" % self.image
 

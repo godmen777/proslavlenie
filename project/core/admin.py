@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #!/usr/bin/env python
 from django.contrib import admin
-from project.core.models import Article, Page, SliderItem, ArticleGalleryImage, NewsGalleryImage, PageGalleryImage, News
+from project.core.models import Article, Page, SliderItem, ArticleGalleryImage, NewsGalleryImage, PageGalleryImage, News, Review
 from image_cropping import ImageCroppingMixin
 from cicu.widgets import CicuUploderInput
 from django import forms
@@ -35,7 +35,11 @@ class PageAdmin(admin.ModelAdmin):
     inlines = [PageImagesInline]
     # prepopulated_fields = {'slug':('id',)}
 
+class SliderItemAdmin(ImageCroppingMixin, admin.ModelAdmin):
+    model = SliderItem
+
 admin.site.register(Article, ArticleAdmin)
 admin.site.register(Page, PageAdmin)
-admin.site.register(SliderItem)
+admin.site.register(SliderItem, SliderItemAdmin)
 admin.site.register(News, NewsAdmin)
+admin.site.register(Review)

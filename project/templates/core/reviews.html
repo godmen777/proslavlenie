@@ -12,7 +12,7 @@
 {% endblock %}
 
 {% block content %}
-<div id="news" class="content-wrapper" style="margin-left:0"><!-- Content Wrapper. Contains page content -->
+<div id="article" class="content-wrapper article" style="margin-left:0"><!-- Content Wrapper. Contains page content -->
 
     <section class="header">
         <div class="container">
@@ -78,29 +78,17 @@
             <div class="row">
 
                 <div class="col-xs-12 col-md-7">
-                    <h1 class="">{{ news.name }}</h1>
+                    <h1 class="">О нас пишут</h1>
                 </div>
 
-                <div class="col-xs-12">
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <img src="{% cropped_thumbnail news "cropping" scale=1 %}">
-                        </div>
-                        <div class="col-xs-9">
-                            <p>{{ news.description }}</p>
-                            <div class="gallery">
-{#                                <div class="row">#}
-                                    {% for img in news.get_gallery_images %}
-{#                                        <div class="col-xs-2">#}
-                                            <img src="{% cropped_thumbnail img "cropping" scale=1 %}">
-{#                                        </div>#}
-                                    {% endfor %}
-{#                                </div>#}
-                            </div>
-                        </div>
+                {% for review in reviews %}
+                    <div class="col-xs-12" style="margin-bottom: 30px;">
+                        <p style="font-size: 15px;">{{ review.description }}</p>
+                        <span style="float: right; font-size: 12px;">- {{ review.name }}</span>
                     </div>
+                {% endfor %}
 
-                </div>
+
 
             </div>
         </div>

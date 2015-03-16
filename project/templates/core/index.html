@@ -6,8 +6,7 @@
 {% block page_css %}
     <link href="{{ STATIC_URL }}theme/css/style.css" rel="stylesheet" type="text/css" />
     <link href="{{ STATIC_URL }}theme/css/swiper.min.css" rel="stylesheet" type="text/css" />
-    <style>
-</style>
+    <link href="{{ STATIC_URL }}theme/css/animate.css " rel="stylesheet" type="text/css" />
 {% endblock %}
 
 {% block content %}
@@ -56,27 +55,20 @@
                     <!-- Swiper -->
                     <div class="swiper-container">
                         <div class="swiper-wrapper">
-                            <div class="swiper-slide"><img src="{{ MEDIA_URL }}slider/slide1.jpg" alt=""/></div>
-                            <div class="swiper-slide"><img src="{{ MEDIA_URL }}slider/slide2.jpg" alt=""/></div>
-                            <div class="swiper-slide"><img src="{{ MEDIA_URL }}slider/slide3.jpg" alt=""/></div>
+                            {% for slide in slides %}
+{#                                <div class="swiper-slide"><img src="{{ slide.url }}" alt=""/></div>#}
+                                <img class="swiper-slide" src="{% cropped_thumbnail slide "cropping" scale=1 %}">
+                            {% endfor %}
                         </div>
                         <!-- Add Pagination -->
                         <div class="swiper-pagination">
-                            <span class="my-pager">
-                                <div class="slider_icon">27 <small>апреля</small></div>
-                                <div class="title">Библейские классы</div>
-                                <div class="description">Дополнительные шаблоны созданы на основе базового, </div>
-                            </span>
-                            <span class="my-pager">
-                                <div class="slider_icon">15 <small>марта</small></div>
-                                <div class="title">Сорокодневный пост</div>
-                                <div class="description">Дополнительные шаблоны созданы на основе базового </div>
-                            </span>
-                            <span class="my-pager">
-                                <div class="slider_icon">5 <small>августа</small></div>
-                                <div class="title">День рождения нашей церкви</div>
-                                <div class="description">Дополнительные шаблоны созданы на основе базового, представленного </div>
-                            </span>
+                            {% for slide in slides %}
+                                <span class="my-pager">
+                                    <div class="slider_icon">27 <small>апреля</small></div>
+                                    <div class="title">{{ slide.name|truncatewords:3 }}</div>
+                                    <div class="description">{{ slide.description|truncatewords:12 }}</div>
+                                </span>
+                            {% endfor %}
                         </div>
 {#                        <div class="swiper-pagination swiper-pagination-clickable">#}
 {#                            <span class="swiper-pagination-bullet">#}
@@ -199,11 +191,11 @@
                         <div class="col-xs-12 col-md-12 sepa">
                             <div class="reviews">
                                 <h4><a href="">О нас пишут</a></h4>
-                                {% for news_item in "abc" %}
+                                {% for review in reviews %}
                                     <div class="reviews_item">
                                         <img src="{{ STATIC_URL }}theme/img/quoters.png" alt=""/>
-                                        <a href="">Фонд  действительно протягивает руку помощи и поддержки всем обратившимся в него людям, попавшим в трудную жизненную ситуацию</a>
-                                        <div class="person">— Людмила Людвиговна Ганьжина /член Общественной палаты Томской области , Председатель Томского регионального отделения ООБФ "Российский детский фонд"/</div>
+                                        <a href="">{{ review.description }}</a>
+                                        <div class="person">— {{ review.name }}</div>
                                     </div>
                                 {% endfor %}
                             </div>
@@ -327,4 +319,35 @@
        swiper.slideTo($(this).index());
     });
     </script>
+
+
+
+<script>
+    (function($) {
+        $(document).ready(function() {
+
+            $('.my-pager .title').mouseenter(function(){
+                $(this).parent('.my-pager').addClass('shake animated');
+            });
+            $('.my-pager').mouseleave(function(){
+                $(".my-pager").removeClass('shake animated');
+            });
+
+        });
+
+
+{#    $('div.wrap a').mouseenter(function(){#}
+{#        $(this).next().show();#}
+{#    });#}
+{#    $('div.wrap').mouseleave(function(){#}
+{#        var x = 1;#}
+{#        $('input:text',this).each(function(){#}
+{#            if (this.value) return x = 0;#}
+{#        });#}
+{#        if (x) $('div',this).hide();#}
+{#    });#}
+
+    })(jQuery);
+</script>
+
 {% endblock %}
