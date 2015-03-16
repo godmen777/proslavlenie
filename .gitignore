@@ -18,6 +18,7 @@ atlassian-ide-plugin.xml
 settings_local.py
 logs/
 pids/
+media/
 save_2gis_data.py
 get_2gis_data.py
 get_2gis_filials.py
