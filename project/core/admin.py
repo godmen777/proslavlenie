@@ -3,7 +3,6 @@
 from django.contrib import admin
 from project.core.models import Article, Page, SliderItem, ArticleGalleryImage, NewsGalleryImage, PageGalleryImage, News, Review
 from image_cropping import ImageCroppingMixin
-from cicu.widgets import CicuUploderInput
 from django import forms
 
 
