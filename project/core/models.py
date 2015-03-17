@@ -26,6 +26,9 @@ class SliderItem(models.Model):
     description = models.TextField(verbose_name=u'Описание слайдера')
     image = models.ImageField(verbose_name=u'Изображение для слайдера', upload_to='slider', blank=True)
     cropping = ImageRatioField('image', '880x320', verbose_name=u'Обрезка фото')
+    class Meta:
+        verbose_name = u'Слайд'
+        verbose_name_plural = u'Слайдер на главной'
     def __unicode__(self):
         return _(u'Слайдер: ') + self.name
     def url(self):
@@ -38,6 +41,9 @@ class Article(BaseArticle):
     image = models.ImageField(verbose_name=u'Банер', upload_to='articles/images/', blank=True)
     cropping = ImageRatioField('image', '340x340', verbose_name=u'Иконка')
     slider = models.OneToOneField(SliderItem, blank=True, null=True)
+    class Meta:
+        verbose_name = u'Статья'
+        verbose_name_plural = u'Статьи'
     def __unicode__(self):
         return _(u'Статья: ') + self.name
     def get_gallery_images(self):
@@ -54,6 +60,9 @@ class News(models.Model):
     image = models.ImageField(verbose_name=u'Изображение', upload_to='news/images/', blank=True)
     cropping = ImageRatioField('image', '275x200', verbose_name=u'Иконка')
     date = models.DateField(verbose_name=u'Дата', default=datetime.datetime.now, editable=True)
+    class Meta:
+        verbose_name = u'Новость'
+        verbose_name_plural = u'Новости'
     def __unicode__(self):
         return _(u'Новость: ') + self.name
     def get_gallery_images(self):
@@ -64,10 +73,15 @@ class News(models.Model):
         return '/news/%s' % self.id
 
 
+
+
 class Review(models.Model):
     name = models.CharField(max_length=200, verbose_name=u'Имя')
     description = models.TextField(verbose_name=u'Отзыв')
     date = models.DateField(verbose_name=u'Дата', default=datetime.datetime.now, editable=True)
+    class Meta:
+        verbose_name = u'Отзыв'
+        verbose_name_plural = u'Отзывы'
     def __unicode__(self):
         return _(u'Отзыв: ') + self.name
 

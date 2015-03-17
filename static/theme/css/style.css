@@ -484,6 +484,7 @@ section.footer .pull-right {
     margin: -28px auto;
 }
 .social .social_container .ic {
+    position: relative;
     margin: 0 28px;
     display: inline-block;
     border-radius: 47px;
@@ -492,6 +493,34 @@ section.footer .pull-right {
     background-image: url("../img/social.png");
     -ms-background-position-y: -17px;
     background-position-y: -17px;
+}
+.social .social_container .ic:hover:before {
+    content: "";
+    /* background: #fff; */
+    width: 60px;
+    height: 60px;
+    border-radius: 30px;
+    /*border: 1px solid #f00000;*/
+    position: absolute;
+    left: -7px;
+    top: -6px;
+    z-index: -1;
+}
+.social .social_container .ic:before {
+    content: "";
+    /*background: #fff;*/
+    width: 47px;
+    height: 47px;
+    border-radius: 23px;
+    position: absolute;
+    left: 0;
+    top: 2px;
+    z-index: -1;
+    /*-webkit-transition: border 0.5s ease;*/
+    /*transition--ease-out: border 0.5s ease;*/
+    /*-moz-transition--ease-out: all 1s;*/
+    /*-webkit-transition--ease-out: all 1s;*/
+    /*-o-transition--ease-out: all 1s;*/
 }
 .vk.ic {
     -ms-background-position-x: -79px;
