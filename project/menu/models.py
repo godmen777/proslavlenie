@@ -13,7 +13,9 @@ class MenuCategory(MPTTModel):
                             related_name='children', blank=True,
                             help_text=u'Родительская категория для этой категории', null=True)
     created_at = models.DateTimeField(u'Дата создания', auto_now_add=True)
-
+    class Meta:
+        verbose_name = u'Раздел меню служения'
+        verbose_name_plural = u'Меню служения'
     def __unicode__(self):
         # return self.name
         return '%s%s' % ('--' * self.level, self.name)
