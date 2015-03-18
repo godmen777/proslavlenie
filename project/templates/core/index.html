@@ -138,7 +138,7 @@
                         </div>
                         <div class="col-xs-12 col-md-12 sepa">
                             <div class="news">
-                                <h4><a href="">Новости</a></h4>
+                                <h4><a href="/news/">Новости</a></h4>
                                 {% for news_item in news %}
                                     <div class="news_item">
                                         <div class="date">{{ news_item.date }}</div>
@@ -160,7 +160,7 @@
                         </div>
                         <div class="col-xs-6 col-md-6 sepa">
                             <div class="small_block">
-                                <a href=""><img src="{{ STATIC_URL }}theme/img/glory.jpg" alt=""/></a>
+                                <a href="/testimonys"><img src="{{ STATIC_URL }}theme/img/glory.jpg" alt=""/></a>
                             </div>
                         </div>
                         <div class="col-xs-6 col-md-6 sepa">
@@ -194,7 +194,7 @@
                                 {% for review in reviews %}
                                     <div class="reviews_item">
                                         <img src="{{ STATIC_URL }}theme/img/quoters.png" alt=""/>
-                                        <a href="">{{ review.description }}</a>
+                                        <a href="{{ review.url }}">{{ review.description }}</a>
                                         <div class="person">— {{ review.name }}</div>
                                     </div>
                                 {% endfor %}
