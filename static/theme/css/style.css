@@ -54,17 +54,17 @@ img.radius90 {
     padding-top:20px;
     padding-bottom: 20px;
 }
-section.header {
+#front section.header {
     background: url("../img/header_bg.jpg") center no-repeat;
     background-size: 100% 100%;
     padding-top: 60px;
     padding-bottom: 60px;
 }
-.article section.header {
+section.header {
     background: url("../img/header_us.jpg") no-repeat;
-    /*background-position: top left;*/
-    /*background-size: 100%;*/
-    /*background-size: contain;*/
+    background-size: 100% 100%;
+    padding-top: 60px;
+    padding-bottom: 60px;
 }
 section.content {
     padding-top: 60px;
@@ -495,27 +495,21 @@ section.footer .pull-right {
     background-position-y: -17px;
 }
 .social .social_container .ic:hover:before {
-    content: "";
-    /* background: #fff; */
     width: 60px;
     height: 60px;
     border-radius: 30px;
-    /*border: 1px solid #f00000;*/
+    border: 10px solid #3F90C6;
+}
+.social .social_container .ic:before {
+    content: "";
+    width: 60px;
+    height: 60px;
+    border-radius: 30px;
     position: absolute;
     left: -7px;
     top: -6px;
     z-index: -1;
-}
-.social .social_container .ic:before {
-    content: "";
-    /*background: #fff;*/
-    width: 47px;
-    height: 47px;
-    border-radius: 23px;
-    position: absolute;
-    left: 0;
-    top: 2px;
-    z-index: -1;
+    -webkit-transition: all 0.3s ease;
     /*-webkit-transition: border 0.5s ease;*/
     /*transition--ease-out: border 0.5s ease;*/
     /*-moz-transition--ease-out: all 1s;*/
@@ -531,12 +525,12 @@ section.footer .pull-right {
     background-position-x: -384px;
 }
 .fb.ic {
-    -ms-background-position-x: -139px;
-    background-position-x: -139px;
+    -ms-background-position-x: -141px;
+    background-position-x: -141px;
 }
 .ig.ic {
-    -ms-background-position-x: -200px;
-    background-position-x: -200px;
+    -ms-background-position-x: -202px;
+    background-position-x: -202px;
 }
 .yt.ic {
     -ms-background-position-x: -507px;
@@ -546,5 +540,9 @@ section.footer .pull-right {
     -ms-background-position-x: -18px;
     background-position-x: -18px;
 }
-
+#testimonys .content img {
+    float: left;
+    width: 100px;
+    height: 100px;
+}
 

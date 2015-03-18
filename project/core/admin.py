@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 #!/usr/bin/env python
 from django.contrib import admin
-from project.core.models import Article, Page, SliderItem, ArticleGalleryImage, NewsGalleryImage, PageGalleryImage, News, Review
+from project.core.models import Article, Page, SliderItem, ArticleGalleryImage, NewsGalleryImage, PageGalleryImage
+from project.core.models import News, Review, Testimony, TestimonyGalleryImage
 from image_cropping import ImageCroppingMixin
 from django import forms
 
@@ -13,6 +14,9 @@ class ArticleImagesInline(ImageCroppingMixin, admin.StackedInline):
 
 class NewsImagesInline(ArticleImagesInline):
     model = NewsGalleryImage
+
+class TestimonyImagesInline(ArticleImagesInline):
+    model = TestimonyGalleryImage
 
 class PageImagesInline(admin.StackedInline):
     model = PageGalleryImage
@@ -29,6 +33,11 @@ class NewsAdmin(ImageCroppingMixin, admin.ModelAdmin):
     inlines = [NewsImagesInline]
     fields = ('name', 'date', 'description', 'image', 'cropping' )
 
+class TestimonyAdmin(ImageCroppingMixin, admin.ModelAdmin):
+    model = News
+    inlines = [TestimonyImagesInline]
+    fields = ('name', 'description', 'image' )
+
 class PageAdmin(admin.ModelAdmin):
     model = Page
     inlines = [PageImagesInline]
@@ -42,3 +51,4 @@ admin.site.register(Page, PageAdmin)
 admin.site.register(SliderItem, SliderItemAdmin)
 admin.site.register(News, NewsAdmin)
 admin.site.register(Review)
+admin.site.register(Testimony, TestimonyAdmin)
