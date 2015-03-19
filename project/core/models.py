@@ -23,6 +23,7 @@ class BaseArticle(models.Model):
 # единица слайдера , связи 1 к 1 со статьями и со страницами
 class SliderItem(models.Model):
     name = models.CharField(max_length=200, verbose_name=u'Название слайдера')
+    link = models.CharField(max_length=200, verbose_name=u'Ссылка на материал', help_text=u'Ссылка должна быть относительной и начинаться с корня сайта со знака "/" \n пример ссылки "/news/1" ')
     date = models.DateField(verbose_name=u'Дата', default=datetime.datetime.now, editable=True)
     description = models.TextField(verbose_name=u'Описание слайдера')
     image = models.ImageField(verbose_name=u'Изображение для слайдера', upload_to='slider', blank=True)
