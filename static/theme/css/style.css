@@ -491,8 +491,6 @@ section.footer .pull-right {
     width: 47px;
     height: 47px;
     background-image: url("../img/social.png");
-    -ms-background-position-y: -17px;
-    background-position-y: -17px;
 }
 .social .social_container .ic:hover:before {
     width: 60px;
@@ -517,28 +515,22 @@ section.footer .pull-right {
     /*-o-transition--ease-out: all 1s;*/
 }
 .vk.ic {
-    -ms-background-position-x: -79px;
-    background-position-x: -79px;
+    background-position: -79px -17px;
 }
 .od.ic {
-    -ms-background-position-x: -384px;
-    background-position-x: -384px;
+    background-position: -384px -17px;
 }
 .fb.ic {
-    -ms-background-position-x: -141px;
-    background-position-x: -141px;
+    background-position: -141px -17px;
 }
 .ig.ic {
-    -ms-background-position-x: -202px;
-    background-position-x: -202px;
+    background-position: -202px -17px;
 }
 .yt.ic {
-    -ms-background-position-x: -507px;
-    background-position-x: -507px;
+    background-position: -507px -17px;
 }
 .tw.ic {
-    -ms-background-position-x: -18px;
-    background-position-x: -18px;
+    background-position: -18px -17px;
 }
 #testimonys .content img {
     float: left;

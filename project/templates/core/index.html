@@ -64,7 +64,7 @@
                         <div class="swiper-pagination">
                             {% for slide in slides %}
                                 <span class="my-pager">
-                                    <div class="slider_icon">27 <small>апреля</small></div>
+                                    <div class="slider_icon">{{ slide.date|date:"j" }} <small>{{ slide.date|date:"E" }}</small></div>
                                     <div class="title">{{ slide.name|truncatewords:3 }}</div>
                                     <div class="description">{{ slide.description|truncatewords:12 }}</div>
                                 </span>
@@ -134,7 +134,7 @@
                 <div class="col-xs-12 col-md-5">
                     <div class="row">
                         <div class="col-xs-12 col-md-12 sepa">
-                            <a href=""><img src="{{ STATIC_URL }}theme/img/pastor.jpg" alt=""/></a>
+                            <a href=""><img style="width: 100%;" src="{{ STATIC_URL }}theme/img/pastor.jpg" alt=""/></a>
                         </div>
                         <div class="col-xs-12 col-md-12 sepa">
                             <div class="news">
@@ -194,8 +194,8 @@
                                 {% for review in reviews %}
                                     <div class="reviews_item">
                                         <img src="{{ STATIC_URL }}theme/img/quoters.png" alt=""/>
-                                        <a href="{{ review.url }}">{{ review.description }}</a>
-                                        <div class="person">— {{ review.name }}</div>
+                                        <a href="{{ review.url }}">{{ review.description|truncatewords:8 }}</a>
+                                        <div class="person">— {{ review.name|truncatewords:6 }}</div>
                                     </div>
                                 {% endfor %}
                             </div>
@@ -260,7 +260,7 @@
             <div class="row">
 
                 <div class="col-xs-12 col-md-12 sepa">
-                    <h2>Статьи</h2>
+                    <h2><a href="">Статьи</a></h2>
                 </div>
 
                 {% for article in articles %}
