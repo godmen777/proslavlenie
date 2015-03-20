@@ -22,10 +22,16 @@ def indexView(request, template_name="catalog/index.html"):
     menu_objects = MenuCategory.objects.all()
     slides = SliderItem.objects.all()[:3]
     # получение ссылок для видео
-    main_video = Video.objects.filter(category=1).last()
-    main_video.video = main_video.video[17:]
-    pritch_video = Video.objects.filter(category=2).last()
-    pritch_video.video = pritch_video.video[17:]
+    try:        
+        main_video = Video.objects.filter(category=1).last()
+        main_video.video = main_video.video[17:]
+    except:
+        None
+    try:
+        pritch_video = Video.objects.filter(category=2).last()
+        pritch_video.video = pritch_video.video[17:]
+    except:
+        None
     # for slide in slides:
     #     try:
     #         slide.article = Article.objects.get(slider=slide.id)
