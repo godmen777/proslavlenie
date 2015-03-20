@@ -537,4 +537,33 @@ section.footer .pull-right {
     width: 100px;
     height: 100px;
 }
-
+.modal-body {
+    padding: 0;
+}
+.modal-primary .modal-header, .modal-primary .modal-footer {
+    border-color: #307095
+}
+.modal-primary .modal-body, 
+.modal-primary .modal-header,
+.modal-primary .modal-footer,
+.modal-primary .modal-title {
+    color: #fff!important;
+}
+.bg-light-blue, .label-primary, .modal-primary .modal-body {
+    background-color: #0773bb !important
+}
+.bg-light-blue-active, .modal-primary .modal-header, .modal-primary .modal-footer {
+    background-color: #0773bb !important
+}
+.modal-primary .modal-header, .modal-primary .modal-footer {
+    border-color: #307095
+}
+.btn-outline:hover, .btn-outline:focus, .btn-outline:active {
+    color: rgba(255,255,255,0.7);
+    border-color: rgba(255,255,255,0.7);
+}
+.btn-outline {
+    border: 1px solid #fff;
+    background: transparent;
+    color: #fff;
+}

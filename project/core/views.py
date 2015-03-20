@@ -11,7 +11,7 @@ from project.accounts.models import getOrganizerProfile
 from project.accounts.forms import OrganizerProfileForm, UserRegistrationForm
 from django.core.exceptions import ObjectDoesNotExist
 from django.http.response import Http404
-from project.core.models import Article, ArticleGalleryImage, Page, PageGalleryImage, News, SliderItem, Review, Testimony
+from project.core.models import Article, ArticleGalleryImage, Page, PageGalleryImage, News, SliderItem, Review, Testimony, Video
 from project.menu.models import MenuCategory
 
 
@@ -21,6 +21,11 @@ def indexView(request, template_name="catalog/index.html"):
     news = News.objects.all()[:5]
     menu_objects = MenuCategory.objects.all()
     slides = SliderItem.objects.all()[:3]
+    # получение ссылок для видео
+    main_video = Video.objects.filter(category=1).last()
+    main_video.video = main_video.video[17:]
+    pritch_video = Video.objects.filter(category=2).last()
+    pritch_video.video = pritch_video.video[17:]
     # for slide in slides:
     #     try:
     #         slide.article = Article.objects.get(slider=slide.id)

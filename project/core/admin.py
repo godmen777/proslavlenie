@@ -2,7 +2,7 @@
 #!/usr/bin/env python
 from django.contrib import admin
 from project.core.models import Article, Page, SliderItem, ArticleGalleryImage, NewsGalleryImage, PageGalleryImage
-from project.core.models import News, Review, Testimony, TestimonyGalleryImage
+from project.core.models import News, Review, Testimony, TestimonyGalleryImage, Video, VideoCategory
 from image_cropping import ImageCroppingMixin
 from django import forms
 
@@ -20,6 +20,11 @@ class TestimonyImagesInline(ArticleImagesInline):
 
 class PageImagesInline(admin.StackedInline):
     model = PageGalleryImage
+    extra = 0
+
+class VideoCategoryInline(admin.StackedInline):
+    """Вывод заказов списком"""
+    model = VideoCategory
     extra = 0
 
 class ArticleAdmin(ImageCroppingMixin, admin.ModelAdmin):
@@ -41,10 +46,13 @@ class TestimonyAdmin(ImageCroppingMixin, admin.ModelAdmin):
 class PageAdmin(admin.ModelAdmin):
     model = Page
     inlines = [PageImagesInline]
-    # prepopulated_fields = {'slug':('id',)}
 
 class SliderItemAdmin(ImageCroppingMixin, admin.ModelAdmin):
     model = SliderItem
+
+# class VideoAdmin(admin.ModelAdmin):
+#     model = Video
+#     inlines = [VideoCategoryInline]
 
 admin.site.register(Article, ArticleAdmin)
 admin.site.register(Page, PageAdmin)
@@ -52,3 +60,5 @@ admin.site.register(SliderItem, SliderItemAdmin)
 admin.site.register(News, NewsAdmin)
 admin.site.register(Review)
 admin.site.register(Testimony, TestimonyAdmin)
+admin.site.register(Video)
+admin.site.register(VideoCategory)

@@ -131,6 +131,24 @@ class TestimonyGalleryImage(models.Model):
         return "/media/%s" % self.image
 
 
+"""Блок Свидетельства"""
+class VideoCategory(models.Model):
+    name = models.CharField(verbose_name=u'Название видео категории', max_length=200)
+    def __unicode__(self):
+        return u'Видео категория: %s' % self.name
+
+class Video(models.Model):
+    name = models.CharField(max_length=200, verbose_name=u'Название')
+    description = models.TextField(verbose_name=u'Описание')
+    cover = models.ImageField(verbose_name=u'Обложка', upload_to='covers', blank=True)
+    video = models.CharField(verbose_name=u'ссылка на видео youtube', max_length=200, help_text=u'вводите ссылку на видео которая получается в результате нажатия на кнопку поделиться в youtube, например "https://youtu.be/t42-71RpRgI?t=1h41m40s" ')
+    category = models.ForeignKey(VideoCategory, verbose_name=u'Выбрать категорию для видео', blank=True)
+    class Meta:
+        verbose_name = u'Видео материал'
+        verbose_name_plural = u'Видео контент'
+    def __unicode__(self):
+        return u'Видео %s' % self.name
+
 
 class Page(BaseArticle):
     slider = models.OneToOneField(SliderItem)
