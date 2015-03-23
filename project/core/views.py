@@ -32,6 +32,11 @@ def indexView(request, template_name="catalog/index.html"):
         pritch_video.video = pritch_video.video[17:]
     except:
         None
+    try:
+        videoblog_video = Video.objects.filter(category=3).last()
+        videoblog_video.video = videoblog_video.video[17:]
+    except:
+        None
     # for slide in slides:
     #     try:
     #         slide.article = Article.objects.get(slider=slide.id)

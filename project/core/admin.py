@@ -50,6 +50,10 @@ class PageAdmin(admin.ModelAdmin):
 class SliderItemAdmin(ImageCroppingMixin, admin.ModelAdmin):
     model = SliderItem
 
+class VideoAdmin(ImageCroppingMixin, admin.ModelAdmin):
+    model = Video
+    fields = ('name', 'description', 'video', 'category', 'cover', ('cropping', 'cropping_pritch', 'cropping_videoblog'))
+
 # class VideoAdmin(admin.ModelAdmin):
 #     model = Video
 #     inlines = [VideoCategoryInline]
@@ -60,5 +64,5 @@ admin.site.register(SliderItem, SliderItemAdmin)
 admin.site.register(News, NewsAdmin)
 admin.site.register(Review)
 admin.site.register(Testimony, TestimonyAdmin)
-admin.site.register(Video)
+admin.site.register(Video, VideoAdmin)
 admin.site.register(VideoCategory)

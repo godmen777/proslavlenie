@@ -141,6 +141,9 @@ class Video(models.Model):
     name = models.CharField(max_length=200, verbose_name=u'Название')
     description = models.TextField(verbose_name=u'Описание')
     cover = models.ImageField(verbose_name=u'Обложка', upload_to='covers', blank=True)
+    cropping = ImageRatioField('cover', '479x320', verbose_name=u'Обложка основного видео на главной')
+    cropping_pritch = ImageRatioField('cover', '173x150', verbose_name=u'Обложка проповеди на главной')
+    cropping_videoblog = ImageRatioField('cover', '275x200', verbose_name=u'Обложка видеоблог на главной')
     video = models.CharField(verbose_name=u'ссылка на видео youtube', max_length=200, help_text=u'вводите ссылку на видео которая получается в результате нажатия на кнопку поделиться в youtube, например "https://youtu.be/t42-71RpRgI?t=1h41m40s" ')
     category = models.ForeignKey(VideoCategory, verbose_name=u'Выбрать категорию для видео', blank=True)
     class Meta:

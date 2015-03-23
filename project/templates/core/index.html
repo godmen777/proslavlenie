@@ -134,7 +134,8 @@
                 <div class="col-xs-12 col-md-5">
                     <div class="row">
                         <div class="col-xs-12 col-md-12 sepa">
-                            <a style="cursor: pointer" name="" data-toggle="modal" data-target="#myModal"><img style="width: 100%;" src="/media/{{ main_video.cover }}" alt=""/></a>
+                            <a style="cursor: pointer" name="" data-toggle="modal" data-target="#myModal"><img style="width: 100%;" src="{% cropped_thumbnail main_video "cropping" scale=1 %}"></a>
+{#                            <img style="width: 100%;" src="/media/{{ main_video.cover }}" alt=""/>#}
                         </div>
 
                         <div class="modal modal-primary fade" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
@@ -184,7 +185,11 @@
                         </div>
                         <div class="col-xs-6 col-md-6 sepa">
                             <div class="small_block">
-                                <a style="cursor: pointer" name="" data-toggle="modal" data-target="#pritchModal"><img style="width: 100%;" src="/media/{{ pritch_video.cover }}" alt=""/></a>
+                                <a style="cursor: pointer" name="" data-toggle="modal" data-target="#pritchModal">
+                                    <img style="width: 100%;" src="{% cropped_thumbnail pritch_video "cropping_pritch" scale=1 %}">
+                                    <div class="video_description">Проповедь</div>
+                                </a>
+{#                                <img style="width: 100%;" src="/media/{{ pritch_video.cover }}" alt=""/>#}
                                 <div class="modal modal-primary fade" id="pritchModal" tabindex="-1" role="dialog" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
@@ -242,9 +247,25 @@
                             </a>
                         </div>
                         <div class="col-xs-12 col-md-12 sepa">
-                            <a href="">
-                                <img src="{{ STATIC_URL }}theme/img/video_blog.jpg" alt=""/>
-                            </a>
+                            <a style="cursor: pointer" name="" data-toggle="modal" data-target="#videoblogModal"><img style="width: 100%;" src="{% cropped_thumbnail videoblog_video "cropping_videoblog" scale=1 %}"></a>
+{#                                <img style="width: 100%;" src="/media/{{ pritch_video.cover }}" alt=""/>#}
+                            <div class="modal modal-primary fade" id="videoblogModal" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                            <h4 class="modal-title">{{ videoblog_video.name }}</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <iframe width="598" height="360" src="https://www.youtube.com/embed/{{ videoblog_video.video }}" frameborder="0" allowfullscreen></iframe>
+    {#                                            <p><iframe width="420" height="315" src="{{ main_video.video }}" frameborder="0" allowfullscreen></iframe></p>#}
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Закрыть</button>
+                                        </div>
+                                    </div><!-- /.modal-content -->
+                                </div><!-- /.modal-dialog -->
+                            </div><!-- /.modal -->
                         </div>
                     </div>
                 </div>
